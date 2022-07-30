@@ -7,8 +7,8 @@ on:
       - "master"
 
 jobs:
-  pre-release:
-    name: "Pre Release"
+  generate-artifacts:
+    name: "Generate JAR"
     runs-on: "ubuntu-latest"
 
     steps:
