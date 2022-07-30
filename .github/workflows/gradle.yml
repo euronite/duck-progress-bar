@@ -30,6 +30,7 @@ jobs:
       - name: Release with Notes
         uses: softprops/action-gh-release@v1
         with:
-          files: build/libs/duck-progress-bar-1.0.jar
+          tag_name: "latest"
+          files: /home/runner/work/duck-progress-bar/duck-progress-bar/builds/duck-progress-bar-1.0.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
