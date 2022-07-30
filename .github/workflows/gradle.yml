@@ -39,4 +39,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            *.jar
+            duck-progress-bar-1.0.jar
