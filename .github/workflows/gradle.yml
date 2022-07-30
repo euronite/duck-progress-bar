@@ -7,16 +7,27 @@ on:
       - "master"
 
 jobs:
+
   pre-release:
     name: "Pre Release"
     runs-on: "ubuntu-latest"
-
     steps:
-      # ...
-      - name: "Build & test"
+      - uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 0
+      - name: Setup JDK
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+      - name: Build with Gradle
         run: |
-          echo "done!"
-
+          ./gradlew jar
+           git_hash=$(git rev-parse --short "$GITHUB_SHA")
+           echo "git_hash=$git_hash" >> $GITHUB_ENV
+           echo "snapshotVersion=5.5-SNAPSHOT" >> $GITHUB_ENV
+           echo "artifactPath=$(pwd)/builds" >> $GITHUB_ENV
+      - name: uploads
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
@@ -24,5 +35,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            LICENSE.txt
             *.jar
