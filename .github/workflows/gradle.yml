@@ -27,16 +27,9 @@ jobs:
            echo "git_hash=$git_hash" >> $GITHUB_ENV
            echo "snapshotVersion=5.5-SNAPSHOT" >> $GITHUB_ENV
            echo "artifactPath=$(pwd)/builds" >> $GITHUB_ENV
-      - name: go to libs
-        run: |
-          cd build
-          cd libs
-      - name: uploads
-        uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Release with Notes
+        uses: softprops/action-gh-release@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-            duck-progress-bar-1.0.jar
+          files: build/libs/duck-progress-bar-1.0.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
