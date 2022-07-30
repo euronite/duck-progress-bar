@@ -20,8 +20,6 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '11'
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
       - name: Build with Gradle
         run: |
           ./gradlew jar
@@ -37,4 +35,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            *.jar
+            $(pwd)/builds/libs/*.jar
