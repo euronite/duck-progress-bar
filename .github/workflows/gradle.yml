@@ -27,6 +27,10 @@ jobs:
            echo "git_hash=$git_hash" >> $GITHUB_ENV
            echo "snapshotVersion=5.5-SNAPSHOT" >> $GITHUB_ENV
            echo "artifactPath=$(pwd)/builds" >> $GITHUB_ENV
+      - name: go to libs
+        run: |
+          cd build
+          cd libs
       - name: uploads
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -35,4 +39,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            $(pwd)/builds/libs/*.jar
+            *.jar
