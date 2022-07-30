@@ -23,14 +23,10 @@ jobs:
       - name: Build with Gradle
         run: |
           ./gradlew jar
-           git_hash=$(git rev-parse --short "$GITHUB_SHA")
-           echo "git_hash=$git_hash" >> $GITHUB_ENV
-           echo "snapshotVersion=5.5-SNAPSHOT" >> $GITHUB_ENV
-           echo "artifactPath=$(pwd)/builds" >> $GITHUB_ENV
       - name: Release with Notes
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "latest"
-          files: /home/runner/work/duck-progress-bar/duck-progress-bar/builds/duck-progress-bar-1.0.jar
+          files: /home/runner/work/duck-progress-bar/duck-progress-bar/build/libs/duck-progress-bar-1.0.jar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
